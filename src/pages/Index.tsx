@@ -1,12 +1,25 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import FeaturedSection from "@/components/FeaturedSection";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <HeroSection />
+      <FeaturedSection />
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-background px-6 py-12 sm:px-12">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 text-center">
+          <span className="font-display text-lg font-bold uppercase tracking-[0.3em] text-foreground">
+            Anamic
+          </span>
+          <p className="font-body text-sm text-muted-foreground">
+            © 2026 Anamic. All rights reserved. Forged in the future.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
