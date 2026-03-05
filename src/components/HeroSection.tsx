@@ -60,7 +60,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 1.1 }}
           className="flex flex-col gap-4 sm:flex-row"
         >
-          <button className="group relative overflow-hidden rounded-sm border border-primary/50 bg-primary px-10 py-4 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground transition-all hover:glow-orange hover:shadow-lg">
+          <a href="/shop" className="group relative overflow-hidden rounded-sm border border-primary/50 bg-primary px-10 py-4 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground transition-all hover:glow-orange hover:shadow-lg">
             <span className="relative z-10">Shop Collection</span>
             <div className="absolute inset-0 -translate-x-full bg-neon-purple transition-transform duration-500 group-hover:translate-x-0" />
             <span className="absolute inset-0 z-10 flex items-center justify-center font-display text-sm font-bold uppercase tracking-widest text-foreground opacity-0 transition-opacity duration-500 group-hover:opacity-100">
