@@ -66,7 +66,7 @@ const HeroSection = () => {
             <span className="absolute inset-0 z-10 flex items-center justify-center font-display text-sm font-bold uppercase tracking-widest text-foreground opacity-0 transition-opacity duration-500 group-hover:opacity-100">
               Shop Collection
             </span>
-          </button>
+          </a>
 
           <button className="rounded-sm border border-foreground/20 bg-transparent px-10 py-4 font-display text-sm font-bold uppercase tracking-widest text-foreground transition-all hover:border-neon-purple hover:glow-purple">
             Discover More
