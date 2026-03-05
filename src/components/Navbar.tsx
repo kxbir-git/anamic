@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ShoppingBag, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useCart } from "@/context/CartContext";
 
 const Navbar = () => {
   return (
