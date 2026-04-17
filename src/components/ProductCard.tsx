@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import type { Product } from "@/data/products";
+import type { Product } from "@/hooks/useProducts";
 import { useCart } from "@/context/CartContext";
 import { ShoppingBag } from "lucide-react";
 
@@ -55,7 +55,7 @@ const ProductCard = ({ product, index }: { product: Product; index: number }) =>
               ))}
             </div>
             <button
-              onClick={() => addItem(product, selectedSize)}
+              onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image }, selectedSize)}
               className="flex w-full items-center justify-center gap-2 bg-primary py-2.5 font-display text-xs font-bold uppercase tracking-wider text-primary-foreground transition-all hover:glow-orange"
             >
               <ShoppingBag className="h-3.5 w-3.5" />
