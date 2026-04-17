@@ -19,8 +19,12 @@ const finishes: Finish[] = [
 const sizes = ["A3", "A2", "A1"];
 
 const Posters = () => {
-  const posters = useMemo(() => products.filter((p) => p.category === "Posters"), []);
-  const [activeId, setActiveId] = useState(posters[0]?.id);
+  const { data: allProducts = [], isLoading } = useProducts();
+  const posters = useMemo(
+    () => allProducts.filter((p) => p.category === "Posters"),
+    [allProducts]
+  );
+  const [activeId, setActiveId] = useState<string | undefined>(undefined);
   const [size, setSize] = useState("A2");
   const [finishId, setFinishId] = useState("matte");
   const [frame, setFrame] = useState<FrameStyle>("black");
@@ -30,7 +34,21 @@ const Posters = () => {
   const finish = finishes.find((f) => f.id === finishId)!;
   const sizeMultiplier = size === "A1" ? 1.8 : size === "A2" ? 1.3 : 1;
   const framePrice = frame === "none" ? 0 : frame === "oak" ? 45 : 35;
-  const totalPrice = Math.round(active.price * finish.multiplier * sizeMultiplier + framePrice);
+  const totalPrice = active
+    ? Math.round(active.price * finish.multiplier * sizeMultiplier + framePrice)
+    : 0;
+
+  if (isLoading || !active) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <CartDrawer />
+        <div className="flex min-h-screen items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-neon-orange" />
+        </div>
+      </div>
+    );
+  }
 
   const frameStyles: Record<FrameStyle, string> = {
     none: "p-0 bg-transparent",
