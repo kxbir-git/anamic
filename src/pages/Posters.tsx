@@ -265,7 +265,12 @@ const Posters = () => {
                   </span>
                 </div>
                 <button
-                  onClick={() => addItem(active, `${size} · ${finish.name}${frame !== "none" ? ` · ${frame === "oak" ? "Oak" : "Black"} Frame` : ""}`)}
+                  onClick={() =>
+                    addItem(
+                      { id: active.id, name: active.name, price: totalPrice, image: active.image },
+                      `${size} · ${finish.name}${frame !== "none" ? ` · ${frame === "oak" ? "Oak" : "Black"} Frame` : ""}`
+                    )
+                  }
                   className="flex w-full items-center justify-center gap-2 bg-primary py-4 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground transition-all hover:glow-orange"
                 >
                   <ShoppingBag className="h-4 w-4" />
