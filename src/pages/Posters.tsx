@@ -309,16 +309,12 @@ const Section = ({ label, children }: { label: string; children: React.ReactNode
   </div>
 );
 
-const OptionButton = ({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) => (
+const OptionButton = React.forwardRef<
+  HTMLButtonElement,
+  { active: boolean; onClick: () => void; children: React.ReactNode }
+>(({ active, onClick, children }, ref) => (
   <button
+    ref={ref}
     onClick={onClick}
     className={`rounded-sm border px-3 py-2.5 text-center transition-all ${
       active
@@ -328,6 +324,7 @@ const OptionButton = ({
   >
     {children}
   </button>
-);
+));
+OptionButton.displayName = "OptionButton";
 
 export default Posters;
