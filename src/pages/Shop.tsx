@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { products } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import ProductCard from "@/components/ProductCard";
 import Navbar from "@/components/Navbar";
 import CartDrawer from "@/components/CartDrawer";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const categories = ["All", "Tees", "Hoodies", "Jackets", "Bottoms", "Accessories", "Posters"];
 
 const Shop = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const { data: products = [], isLoading } = useProducts();
 
   const filtered =
     activeCategory === "All"
@@ -68,11 +69,17 @@ const Shop = () => {
           </motion.div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex items-center justify-center py-24">
+              <Loader2 className="h-8 w-8 animate-spin text-neon-orange" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filtered.map((product, i) => (
+                <ProductCard key={product.id} product={product} index={i} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

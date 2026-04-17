@@ -1,10 +1,10 @@
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ShoppingBag, Check } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Check, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import CartDrawer from "@/components/CartDrawer";
-import { products } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import { useCart } from "@/context/CartContext";
 
 type FrameStyle = "none" | "black" | "oak";
@@ -19,8 +19,12 @@ const finishes: Finish[] = [
 const sizes = ["A3", "A2", "A1"];
 
 const Posters = () => {
-  const posters = useMemo(() => products.filter((p) => p.category === "Posters"), []);
-  const [activeId, setActiveId] = useState(posters[0]?.id);
+  const { data: allProducts = [], isLoading } = useProducts();
+  const posters = useMemo(
+    () => allProducts.filter((p) => p.category === "Posters"),
+    [allProducts]
+  );
+  const [activeId, setActiveId] = useState<string | undefined>(undefined);
   const [size, setSize] = useState("A2");
   const [finishId, setFinishId] = useState("matte");
   const [frame, setFrame] = useState<FrameStyle>("black");
@@ -30,7 +34,21 @@ const Posters = () => {
   const finish = finishes.find((f) => f.id === finishId)!;
   const sizeMultiplier = size === "A1" ? 1.8 : size === "A2" ? 1.3 : 1;
   const framePrice = frame === "none" ? 0 : frame === "oak" ? 45 : 35;
-  const totalPrice = Math.round(active.price * finish.multiplier * sizeMultiplier + framePrice);
+  const totalPrice = active
+    ? Math.round(active.price * finish.multiplier * sizeMultiplier + framePrice)
+    : 0;
+
+  if (isLoading || !active) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <CartDrawer />
+        <div className="flex min-h-screen items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-neon-orange" />
+        </div>
+      </div>
+    );
+  }
 
   const frameStyles: Record<FrameStyle, string> = {
     none: "p-0 bg-transparent",
@@ -247,7 +265,12 @@ const Posters = () => {
                   </span>
                 </div>
                 <button
-                  onClick={() => addItem(active, `${size} · ${finish.name}${frame !== "none" ? ` · ${frame === "oak" ? "Oak" : "Black"} Frame` : ""}`)}
+                  onClick={() =>
+                    addItem(
+                      { id: active.id, name: active.name, price: totalPrice, image: active.image },
+                      `${size} · ${finish.name}${frame !== "none" ? ` · ${frame === "oak" ? "Oak" : "Black"} Frame` : ""}`
+                    )
+                  }
                   className="flex w-full items-center justify-center gap-2 bg-primary py-4 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground transition-all hover:glow-orange"
                 >
                   <ShoppingBag className="h-4 w-4" />
@@ -286,16 +309,12 @@ const Section = ({ label, children }: { label: string; children: React.ReactNode
   </div>
 );
 
-const OptionButton = ({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) => (
+const OptionButton = React.forwardRef<
+  HTMLButtonElement,
+  { active: boolean; onClick: () => void; children: React.ReactNode }
+>(({ active, onClick, children }, ref) => (
   <button
+    ref={ref}
     onClick={onClick}
     className={`rounded-sm border px-3 py-2.5 text-center transition-all ${
       active
@@ -305,6 +324,7 @@ const OptionButton = ({
   >
     {children}
   </button>
-);
+));
+OptionButton.displayName = "OptionButton";
 
 export default Posters;

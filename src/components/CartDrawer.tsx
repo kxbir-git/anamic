@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Minus, Plus, Trash2 } from "lucide-react";
+import { X, Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 
 const CartDrawer = () => {
@@ -88,9 +89,13 @@ const CartDrawer = () => {
                     ${totalPrice}
                   </span>
                 </div>
-                <button className="w-full bg-primary py-3 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:glow-orange">
+                <Link
+                  to="/checkout"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full bg-primary py-3 text-center font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:glow-orange"
+                >
                   Checkout
-                </button>
+                </Link>
               </div>
             )}
           </motion.div>
