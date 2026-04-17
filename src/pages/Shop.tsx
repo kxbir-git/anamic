@@ -7,7 +7,7 @@ import CartDrawer from "@/components/CartDrawer";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const categories = ["All", "Tees", "Hoodies", "Jackets", "Bottoms", "Accessories"];
+const categories = ["All", "Tees", "Hoodies", "Jackets", "Bottoms", "Accessories", "Posters"];
 
 const Shop = () => {
   const [activeCategory, setActiveCategory] = useState("All");

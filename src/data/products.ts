@@ -4,6 +4,9 @@ import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
 import product5 from "@/assets/product-5.jpg";
 import product6 from "@/assets/product-6.jpg";
+import poster1 from "@/assets/poster-1.jpg";
+import poster2 from "@/assets/poster-2.jpg";
+import poster3 from "@/assets/poster-3.jpg";
 
 export interface Product {
   id: string;
@@ -66,5 +69,31 @@ export const products: Product[] = [
     image: product6,
     category: "Accessories",
     sizes: ["One Size"],
+  },
+  {
+    id: "7",
+    name: "Neon Samurai Poster",
+    price: 35,
+    image: poster1,
+    category: "Posters",
+    tag: "NEW",
+    sizes: ["A3", "A2", "A1"],
+  },
+  {
+    id: "8",
+    name: "Shinobi Uzumaki Poster",
+    price: 35,
+    image: poster2,
+    category: "Posters",
+    tag: "HOT",
+    sizes: ["A3", "A2", "A1"],
+  },
+  {
+    id: "9",
+    name: "Katana Sunset Poster",
+    price: 29,
+    image: poster3,
+    category: "Posters",
+    sizes: ["A3", "A2", "A1"],
   },
 ];
