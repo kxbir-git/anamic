@@ -7,6 +7,7 @@ import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
+import Posters from "./pages/Posters";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/posters" element={<Posters />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
