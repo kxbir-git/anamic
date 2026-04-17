@@ -27,7 +27,7 @@ const Navbar = () => {
         <Link to="/shop" className="font-body text-sm font-medium uppercase tracking-[0.2em] text-foreground/60 transition-colors hover:text-neon-orange">
           Shop
         </Link>
-        <Link to="/shop" className="font-body text-sm font-medium uppercase tracking-[0.2em] text-foreground/60 transition-colors hover:text-neon-orange">
+        <Link to="/posters" className="font-body text-sm font-medium uppercase tracking-[0.2em] text-foreground/60 transition-colors hover:text-neon-orange">
           Posters
         </Link>
       </div>
