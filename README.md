@@ -1,1 +1,1 @@
-LINK----------https://anamic.vercel.app/------------/
+Link-     https://anamic.vercel.app/
